@@ -41,19 +41,6 @@ namespace HeadHunterLibrary
             return tmp;
         }
 
-        public string JsonParseString(string json)
-        {
-            string tmp = "";
-            dynamic obj = JObject.Parse(json);
-
-            tmp += obj.name + Environment.NewLine;
-            tmp += "Зарплата от: " + obj.salary.from + "  до: " +
-                                     obj.salary.to + " " +
-                                     obj.salary.currency + Environment.NewLine;
-
-            return tmp;
-        }
-
         public List<Vacancy> JsonParseStringItems(string json)
         {
             List<Vacancy> vacancies = new List<Vacancy>();

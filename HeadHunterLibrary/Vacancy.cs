@@ -17,8 +17,8 @@
 
             if (obj.salary != null)
             {
-                salary_from = obj.salary.from == null ? "-" : obj.salary.from;
-                salary_to = obj.salary.to == null ? "-" : obj.salary.to;
+                salary_from = obj.salary.from ?? "-";
+                salary_to = obj.salary.to ?? "-";
             } else
             {
                 salary_from = "-";

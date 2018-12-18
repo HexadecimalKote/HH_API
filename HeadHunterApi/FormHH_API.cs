@@ -2,6 +2,8 @@
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 
 namespace HeadHunterApi
 {
@@ -16,11 +18,15 @@ namespace HeadHunterApi
 
         private void SearchBtn_Click(object sender, EventArgs e)
         {
-            List<Vacancy> vacancies = model.JsonParseStringItems(model.GetRequest("https://api.hh.ru/vacancies?text=" + SearchTextBox.Text));
+            List<Vacancy> vacancies = new List<Vacancy>();
+                
+            for (int i = 0; i <= 19; i++)
+                vacancies.AddRange(model.JsonParseStringItems(model.GetRequest("https://api.hh.ru/vacancies?text=" + SearchTextBox.Text + ";page=" + i + ";per_page=100")));
+
             dataGridView.Rows.Clear();
 
             int vCount = vacancies.Count;
-            labelCount.Text = "Найденно вакансий: " + vCount;
+            labelInfo.Text = "По запросу: " + (SearchTextBox.Text == "" ? "Все" : SearchTextBox.Text) + "\nНайденно вакансий: " + vCount;
 
             foreach (Vacancy v in vacancies)
             {
@@ -35,6 +41,13 @@ namespace HeadHunterApi
 
                 dataGridView.Rows.Add(row);
             }
+        }
+
+        private void dataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (sender is DataGridView)
+                if ((sender as DataGridView).Columns[e.ColumnIndex] is DataGridViewLinkColumn)
+                    Process.Start(dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
         }
     }
 }

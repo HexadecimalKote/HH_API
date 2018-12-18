@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
@@ -53,27 +54,15 @@ namespace HeadHunterLibrary
             return tmp;
         }
 
-        public string JsonParseStringItems(string json)
+        public List<Vacancy> JsonParseStringItems(string json)
         {
-            string tmp = "";
+            List<Vacancy> vacancies = new List<Vacancy>();
             dynamic obj = JObject.Parse(json);
 
             foreach (dynamic item in obj.items)
-            {
-                tmp += item.id + Environment.NewLine;
-                tmp += item.name + Environment.NewLine;
+                vacancies.Add(new Vacancy(item));
 
-                if (item.salary != null)
-                    tmp += "Зарплата от: " + item.salary.from + "  до: " +
-                                                item.salary.to + " " +
-                                                item.salary.currency + Environment.NewLine;
-                else
-                    tmp += "Зарплата: данные отсутствуют" + Environment.NewLine;
-
-                tmp += new string('=', 20) + Environment.NewLine;
-            }
-
-            return tmp;
+            return vacancies;
         }
     }
 }

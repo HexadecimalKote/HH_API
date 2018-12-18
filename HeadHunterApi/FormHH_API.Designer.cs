@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHH_API));
             this.SearchBtn = new System.Windows.Forms.Button();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
+            this.labelCount = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSalaryMin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSalaryMax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEmployerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSalaryFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSalaryTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,29 +51,35 @@
             // 
             this.SearchBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.SearchBtn.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SearchBtn.Location = new System.Drawing.Point(459, 276);
+            this.SearchBtn.Location = new System.Drawing.Point(418, 283);
             this.SearchBtn.Name = "SearchBtn";
             this.SearchBtn.Size = new System.Drawing.Size(97, 33);
             this.SearchBtn.TabIndex = 1;
             this.SearchBtn.Text = "Search";
             this.SearchBtn.UseVisualStyleBackColor = true;
-            this.SearchBtn.Click += new System.EventHandler(this.GetVacancyBtn_Click);
+            this.SearchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
             // 
             // SearchTextBox
             // 
             this.SearchTextBox.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SearchTextBox.Location = new System.Drawing.Point(12, 276);
+            this.SearchTextBox.Location = new System.Drawing.Point(12, 283);
             this.SearchTextBox.Multiline = true;
             this.SearchTextBox.Name = "SearchTextBox";
-            this.SearchTextBox.Size = new System.Drawing.Size(441, 33);
+            this.SearchTextBox.Size = new System.Drawing.Size(400, 33);
             this.SearchTextBox.TabIndex = 2;
             this.SearchTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // labelCount
+            // 
+            this.labelCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCount.Location = new System.Drawing.Point(521, 282);
+            this.labelCount.Name = "labelCount";
+            this.labelCount.Size = new System.Drawing.Size(207, 33);
+            this.labelCount.TabIndex = 6;
+            this.labelCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // dataGridView
             // 
-            this.dataGridView.AllowUserToAddRows = false;
-            this.dataGridView.AllowUserToDeleteRows = false;
-            this.dataGridView.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -87,101 +92,66 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnID,
             this.ColumnName,
-            this.ColumnSalaryMin,
-            this.ColumnSalaryMax,
             this.ColumnEmployerName,
             this.ColumnAddress,
-            this.ColumnInfo});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnSalaryFrom,
+            this.ColumnSalaryTo,
+            this.ColumnDescription});
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView.Size = new System.Drawing.Size(568, 256);
-            this.dataGridView.TabIndex = 5;
+            this.dataGridView.Size = new System.Drawing.Size(743, 270);
+            this.dataGridView.TabIndex = 7;
             // 
             // ColumnID
             // 
-            this.ColumnID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColumnID.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColumnID.HeaderText = "ID";
             this.ColumnID.Name = "ColumnID";
-            this.ColumnID.ReadOnly = true;
-            this.ColumnID.Width = 45;
+            this.ColumnID.Width = 70;
             // 
             // ColumnName
             // 
-            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColumnName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnName.HeaderText = "Name";
+            this.ColumnName.HeaderText = "Должность";
             this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
-            this.ColumnName.Width = 60;
-            // 
-            // ColumnSalaryMin
-            // 
-            this.ColumnSalaryMin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ColumnSalaryMin.HeaderText = "Salary_min";
-            this.ColumnSalaryMin.Name = "ColumnSalaryMin";
-            this.ColumnSalaryMin.ReadOnly = true;
-            this.ColumnSalaryMin.Width = 83;
-            // 
-            // ColumnSalaryMax
-            // 
-            this.ColumnSalaryMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ColumnSalaryMax.HeaderText = "Salary_max";
-            this.ColumnSalaryMax.Name = "ColumnSalaryMax";
-            this.ColumnSalaryMax.ReadOnly = true;
-            this.ColumnSalaryMax.Width = 86;
             // 
             // ColumnEmployerName
             // 
-            this.ColumnEmployerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ColumnEmployerName.HeaderText = "Employer";
+            this.ColumnEmployerName.HeaderText = "Работодатель";
             this.ColumnEmployerName.Name = "ColumnEmployerName";
-            this.ColumnEmployerName.ReadOnly = true;
-            this.ColumnEmployerName.Width = 75;
             // 
             // ColumnAddress
             // 
-            this.ColumnAddress.HeaderText = "Address";
+            this.ColumnAddress.HeaderText = "Адрес";
             this.ColumnAddress.Name = "ColumnAddress";
-            this.ColumnAddress.ReadOnly = true;
-            this.ColumnAddress.Width = 120;
             // 
-            // ColumnInfo
+            // ColumnSalaryFrom
             // 
-            this.ColumnInfo.HeaderText = "Info";
-            this.ColumnInfo.Name = "ColumnInfo";
-            this.ColumnInfo.ReadOnly = true;
-            this.ColumnInfo.Width = 56;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColumnSalaryFrom.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnSalaryFrom.HeaderText = "Зарплата от";
+            this.ColumnSalaryFrom.Name = "ColumnSalaryFrom";
+            // 
+            // ColumnSalaryTo
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColumnSalaryTo.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnSalaryTo.HeaderText = "Зарплата до";
+            this.ColumnSalaryTo.Name = "ColumnSalaryTo";
+            // 
+            // ColumnDescription
+            // 
+            this.ColumnDescription.HeaderText = "Описание";
+            this.ColumnDescription.Name = "ColumnDescription";
             // 
             // FormHH_API
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 330);
+            this.ClientSize = new System.Drawing.Size(743, 330);
             this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.labelCount);
             this.Controls.Add(this.SearchTextBox);
             this.Controls.Add(this.SearchBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -200,14 +170,15 @@
         #endregion
         private System.Windows.Forms.Button SearchBtn;
         private System.Windows.Forms.TextBox SearchTextBox;
+        private System.Windows.Forms.Label labelCount;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSalaryMin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSalaryMax;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmployerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSalaryFrom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSalaryTo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
     }
 }
 

@@ -1,31 +1,41 @@
 ﻿namespace HeadHunterLibrary
 {
-    struct Vacancy
+    public struct Vacancy
     {
-        string id,
-               name,
-               salary_from,
-               salary_to,
-               employer_name,
-               address,
-               info;
+        public readonly string id,
+                               name,
+                               salary_from,
+                               salary_to,
+                               employer_name,
+                               address,
+                               info;
 
         public Vacancy(dynamic obj)
         {
             id = obj.id;
             name = obj.name;
 
-            salary_from = obj?.salary?.from ?? " ";
-            salary_to = obj?.salary?.to ?? " ";
+            if (obj.salary != null)
+            {
+                salary_from = obj.salary.from == null ? "-" : obj.salary.from;
+                salary_to = obj.salary.to == null ? "-" : obj.salary.to;
+            } else
+            {
+                salary_from = "-";
+                salary_to = "-";
+            }
 
             employer_name = obj.employer.name;
 
             if (obj.address != null)
                 address = obj.address.city + " " + obj.address.street + " " + obj.address.building;
             else
-                address = " ";
+                address = "-";
 
-            info = obj?.description ?? " ";
+            if (obj.alternate_url != null)
+                info = obj.alternate_url;
+            else
+                info = "-";
         }
     }
 }
